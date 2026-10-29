@@ -1604,7 +1604,7 @@
     <div id="page-home" class="page active">
         <main class="hero-banner">
             <div class="server-meta">
-                <span class="server-ip-badge" onclick="copyServerIP()" title="Klik untuk Salin IP">MC.GRIMVERSESMP.XYZ:19192</span>
+                <span class="server-ip-badge" onclick="copyServerIP()" title="Klik untuk Salin IP">mc.grimversesmp.xyz:19192</span>
                 <span class="server-est">• EST. 2026</span>
             </div>
 
@@ -2916,7 +2916,7 @@
             { name: "Copper", price: "Rp25.000", icon: "rank/iconcopper.png", previewImg: "rank/previewcopper.png", kitImg: "rank/kitcopper.png", badge: "🔥 Terpopuler", badgeClass: "badge-popular" },
             { name: "Diamond", price: "Rp75.000", icon: "rank/icondiamond.png", previewImg: "rank/previewdiamond.png", kitImg: "rank/kitdiamond.png", badge: "⭐ Best Value", badgeClass: "badge-bestvalue" },
             { name: "Amethyst", price: "Rp120.000", icon: "rank/iconamethyst.png", previewImg: "rank/previewamethyst.png", kitImg: "rank/kitamethyst.png", badge: "⚡ Favorit", badgeClass: "badge-popular" },
-            { name: "Universe", price: "Rp300.000", icon: "rank/iconuniverse.png", previewImg: "rank/previewuniverse.png", kitImg: "rank/kituniverse.png", badge: "👑 Termahal", badgeClass: "badge-ultimate" }
+            { name: "Obsidian", price: "Rp300.000", icon: "rank/iconobsidian.png", previewImg: "rank/previewobsidian.png", kitImg: "rank/kitobsidian.png", badge: "👑 Termahal", badgeClass: "badge-ultimate" }
         ];
 
         function renderStoreRanks() {
@@ -3029,10 +3029,11 @@
             }, 700);
         }
 
-        /* --- PENGECEKAN STATUS SERVER MENGGUNAKAN mc.grimversesmp.xyz:19192 --- */
-        async function fetchServerStatusLive() {
+        /* --- SCRIPT PENGECEKAN STATUS & JUMLAH PLAYER MENGGUNAKAN PORT 19192 --- */
+                async function fetchServerStatusLive() {
             try {
-                let response = await fetch('https://api.mcstats.io/v3/server/ping/mc.grimversesmp.xyz:19192');
+                // Menggunakan endpoint resmi mcstatus.io v2 untuk Java Edition dengan menyertakan port kustom
+                let response = await fetch('https://api.mcstatus.io/v2/status/java/mc.grimversesmp.xyz:19192');
                 let data = await response.json();
                 
                 if (data && data.online) {
@@ -3045,7 +3046,6 @@
                     document.getElementById('serverStatusText').style.color = "#ef4444";
                 }
             } catch (error) {
-                // Jika offline atau gagal fetch, set status Offline secara akurat
                 document.getElementById('mc-online').innerText = "0";
                 document.getElementById('serverStatusText').innerText = "Offline";
                 document.getElementById('serverStatusText').style.color = "#ef4444";
@@ -3055,9 +3055,8 @@
         setInterval(fetchServerStatusLive, 30000);
 
         function copyServerIP() {
-            // IP join yang disalin ke clipboard menggunakan mc.grimversesmp.xyz:19192
             navigator.clipboard.writeText("mc.grimversesmp.xyz:19192");
-            window.showAlert("Berhasil", "IP Server berhasil disalin: mc.grimversesmp.xyz:19192");
+            window.showAlert("Berhasil", "IP & Port Server berhasil disalin!");
         }
 
         function handlePlatformChange() {
@@ -3136,7 +3135,7 @@
         }
 
         const faqData = [
-            { cat: 'umum', q: 'Bagaimana cara bergabung ke server GrimVerse?', a: 'Kamu bisa join menggunakan IP: mc.grimversesmp.xyz:19192 di Minecraft Java maupun Bedrock Edition.' },
+            { cat: 'umum', q: 'Bagaimana cara bergabung ke server GrimVerse?', a: 'Kamu bisa join menggunakan IP mc.grimversesmp.xyz:19192.' },
             { cat: 'umum', q: 'Versi Minecraft berapa yang didukung server ini?', a: 'Server mendukung versi terbaru dengan sistem crossplay.' },
             { cat: 'umum', q: 'Apakah server ini gratis dimainkan?', a: 'Ya! GrimVerse 100% gratis untuk semua pemain (Free-to-Play).' },
             { cat: 'umum', q: 'Bagaimana cara melakukan klaim hadiah vote?', a: 'Ketik /vote di dalam server untuk mendapatkan link voting dan hadiah menarik.' },
